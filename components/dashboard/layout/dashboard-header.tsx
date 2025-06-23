@@ -1,13 +1,22 @@
-import { Clock } from "lucide-react"
-import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
-import { formatCurrentTime } from "@/lib/utils/time"
+'use client';
 
-interface DashboardHeaderProps {
-  currentTime: Date
-}
+import { useState, useEffect } from "react";
+import { Clock } from "lucide-react";
+import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard";
+import { formatCurrentTime } from "@/lib/utils/time";
 
-export function DashboardHeader({ currentTime }: DashboardHeaderProps) {
-  const { time, period } = formatCurrentTime(currentTime)
+export function DashboardHeader() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // update setiap detik
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const { time, period } = formatCurrentTime(currentTime);
 
   return (
     <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 flex-shrink-0">
@@ -35,5 +44,5 @@ export function DashboardHeader({ currentTime }: DashboardHeaderProps) {
         </div>
       </div>
     </header>
-  )
+  );
 }

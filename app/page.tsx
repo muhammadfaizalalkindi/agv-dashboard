@@ -11,11 +11,9 @@ import { AgeGroups } from "@/components/dashboard/analytics/age-groups"
 import { EthnicityRace } from "@/components/dashboard/analytics/ethnicity-race"
 import { FacialExpressions } from "@/components/dashboard/analytics/facial-expressions"
 import { useDashboardData } from "@/hooks/use-dashboard-data"
-import { useCurrentTime } from "@/hooks/use-current-time"
 import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
 
 export default function Dashboard() {
-  const currentTime = useCurrentTime()
   const { dashboardData, isRefreshing, isInitialLoading, refreshProgress, refreshData, loadInitialData, cleanup } =
     useDashboardData()
 
@@ -51,7 +49,7 @@ export default function Dashboard() {
 
         <LoadingOverlay isVisible={isInitialLoading} />
 
-        <DashboardHeader currentTime={currentTime} />
+        <DashboardHeader /> {/* currentTime prop DIHAPUS */}
 
         <div className="flex-1 grid grid-rows-[auto_1fr_1fr] gap-3 min-h-0">
           <MetricsGrid data={dashboardData} isRefreshing={isRefreshing} showSkeletons={showSkeletons} />
