@@ -3,7 +3,6 @@
 import { useEffect } from "react"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { DashboardHeader } from "@/components/dashboard/layout/dashboard-header"
-import { ProgressIndicator } from "@/components/dashboard/layout/progress-indicator"
 import { LoadingOverlay } from "@/components/dashboard/layout/loading-overlay"
 import { MetricsGrid } from "@/components/dashboard/metrics/metrics-grid"
 import { GenderDistribution } from "@/components/dashboard/analytics/gender-distribution"
@@ -11,11 +10,12 @@ import { AgeGroups } from "@/components/dashboard/analytics/age-groups"
 import { EthnicityRace } from "@/components/dashboard/analytics/ethnicity-race"
 import { FacialExpressions } from "@/components/dashboard/analytics/facial-expressions"
 import { useDashboardData } from "@/hooks/use-dashboard-data"
+import { useCurrentTime } from "@/hooks/use-current-time"
 import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
 
 export default function Dashboard() {
-  const { dashboardData, isRefreshing, isInitialLoading, refreshProgress, refreshData, loadInitialData, cleanup } =
-    useDashboardData()
+  const currentTime = useCurrentTime()
+  const { dashboardData, isRefreshing, isInitialLoading, refreshData, loadInitialData } = useDashboardData()
 
   const showSkeletons = isInitialLoading || isRefreshing
 
@@ -38,18 +38,15 @@ export default function Dashboard() {
     return () => {
       clearInterval(dataRefreshTimer)
       document.removeEventListener("visibilitychange", handleVisibilityChange)
-      cleanup()
     }
-  }, [refreshData, loadInitialData, cleanup])
+  }, [refreshData, loadInitialData])
 
   return (
     <TooltipProvider>
       <div className="h-screen bg-background p-3 overflow-hidden flex flex-col relative">
-        <ProgressIndicator isVisible={isRefreshing || isInitialLoading} progress={refreshProgress} />
-
         <LoadingOverlay isVisible={isInitialLoading} />
 
-        <DashboardHeader /> {/* currentTime prop DIHAPUS */}
+        <DashboardHeader currentTime={currentTime} />
 
         <div className="flex-1 grid grid-rows-[auto_1fr_1fr] gap-3 min-h-0">
           <MetricsGrid data={dashboardData} isRefreshing={isRefreshing} showSkeletons={showSkeletons} />

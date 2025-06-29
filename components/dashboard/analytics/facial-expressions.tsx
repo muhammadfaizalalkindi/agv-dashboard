@@ -15,21 +15,20 @@ interface ExpressionCardProps {
 }
 
 function ExpressionCard({ label, count, percentage, emoji, bgColor, borderColor }: ExpressionCardProps) {
+  const displayPercentage = percentage > 0 ? percentage.toFixed(1) : "0.0"
+
   return (
     <div
-      className="rounded-lg p-2 flex items-center h-full transition-all duration-300 ease-out border-2"
+      className="rounded-lg p-2 flex items-center h-full border-2"
       style={{ backgroundColor: bgColor, borderColor: borderColor }}
     >
       <span className="text-lg mr-2 flex-shrink-0">{emoji}</span>
       <div className="flex flex-col justify-between flex-1">
         <div className="font-medium text-xs text-black">{label}</div>
-        <div
-          className="text-base font-bold transition-all duration-200"
-          style={{ color: DASHBOARD_CONFIG.colors.primary }}
-        >
+        <div className="text-base font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
           {count}
         </div>
-        <div className="text-xs text-gray-500">{percentage.toFixed(1)}% of total</div>
+        <div className="text-xs text-gray-500">{displayPercentage}% of total</div>
       </div>
     </div>
   )

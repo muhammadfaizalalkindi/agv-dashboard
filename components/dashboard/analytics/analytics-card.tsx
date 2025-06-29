@@ -5,9 +5,7 @@ import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
 export function AnalyticsCard({ title, description, icon, isRefreshing, children }: AnalyticsCardProps) {
   return (
     <Card
-      className={`h-full transition-all duration-200 ease-out will-change-transform border-2 ${
-        isRefreshing ? "opacity-85 scale-[0.999]" : "opacity-100 scale-100"
-      }`}
+      className="h-full border-2"
       style={{
         backgroundColor: DASHBOARD_CONFIG.colors.background,
         borderColor: DASHBOARD_CONFIG.colors.primary,

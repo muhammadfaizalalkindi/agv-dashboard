@@ -1,4 +1,5 @@
 import type React from "react"
+
 export interface GenderDistribution {
   male: number
   female: number

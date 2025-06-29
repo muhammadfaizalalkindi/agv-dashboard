@@ -1,20 +1,28 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { Clock } from "lucide-react";
-import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard";
-import { formatCurrentTime } from "@/lib/utils/time";
+import { useState, useEffect } from 'react';
+import { Clock } from 'lucide-react';
+import { DASHBOARD_CONFIG } from '@/lib/constants/dashboard';
+import { formatCurrentTime } from '@/lib/utils/time';
 
 export function DashboardHeader() {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    setHasMounted(true);
+    setCurrentTime(new Date());
+
     const interval = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000); // update setiap detik
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
+
+  if (!hasMounted || !currentTime) {
+    return null; // or show skeleton
+  }
 
   const { time, period } = formatCurrentTime(currentTime);
 
@@ -22,7 +30,7 @@ export function DashboardHeader() {
     <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 flex-shrink-0">
       <div>
         <h1 className="text-lg font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
-          UFAS (UNNES AGV Facial Recognition Analytics System)
+          AGV Dashboard
         </h1>
       </div>
 
@@ -46,3 +54,4 @@ export function DashboardHeader() {
     </header>
   );
 }
+  

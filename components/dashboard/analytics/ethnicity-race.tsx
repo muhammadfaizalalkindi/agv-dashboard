@@ -14,22 +14,21 @@ interface EthnicityGroupProps {
 }
 
 function EthnicityGroup({ label, count, percentage, color, borderColor }: EthnicityGroupProps) {
+  const displayPercentage = percentage > 0 ? percentage.toFixed(1) : "0.0"
+
   return (
     <div
-      className="rounded-lg p-2 flex flex-col justify-between h-full transition-all duration-300 ease-out border-2"
+      className="rounded-lg p-2 flex flex-col justify-between h-full border-2"
       style={{ backgroundColor: color, borderColor: borderColor }}
     >
       <div>
         <div className="text-xs font-medium text-black">{label}</div>
-        <div
-          className="text-base font-bold transition-all duration-200"
-          style={{ color: DASHBOARD_CONFIG.colors.primary }}
-        >
+        <div className="text-base font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
           {count}
         </div>
       </div>
       <div>
-        <div className="text-xs text-gray-500">{percentage.toFixed(1)}% of total</div>
+        <div className="text-xs text-gray-500">{displayPercentage}% of total</div>
       </div>
     </div>
   )

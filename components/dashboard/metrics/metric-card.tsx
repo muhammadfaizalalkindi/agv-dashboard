@@ -5,24 +5,16 @@ import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
 export function MetricCard({ title, value, description, trend, icon, isRefreshing }: MetricCardProps) {
   return (
     <Card
-      className={`transition-all duration-200 ease-out will-change-transform border-2 ${
-        isRefreshing ? "opacity-85 scale-[0.999]" : "opacity-100 scale-100"
-      }`}
+      className="border-2"
       style={{
         backgroundColor: DASHBOARD_CONFIG.colors.error,
         borderColor: DASHBOARD_CONFIG.colors.primary,
       }}
     >
-      <div className="flex items-center justify-between p-2 relative overflow-hidden">
-        {isRefreshing && (
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent animate-shimmer" />
-        )}
+      <div className="flex items-center justify-between p-2">
         <div className="flex-1 min-w-0">
           <div className="text-xs font-medium mb-1 text-black">{title}</div>
-          <div
-            className="text-sm font-bold transition-all duration-200"
-            style={{ color: DASHBOARD_CONFIG.colors.primary }}
-          >
+          <div className="text-sm font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
             {value}
           </div>
           <p className="text-xs flex items-center gap-0.5 text-gray-500">

@@ -15,8 +15,8 @@ export function MetricsGrid({ data, isRefreshing, showSkeletons }: MetricsGridPr
     {
       title: "Total Scans",
       value: data.totalScans.toString(),
-      description: `${Math.floor(Math.random() * 15 + 5)}% from last hour`,
-      trend: "up" as const,
+      description: "0% from last hour",
+      trend: undefined,
       icon: <LineChart className="h-3 w-3" style={{ color: DASHBOARD_CONFIG.colors.primary }} />,
     },
     {
@@ -35,7 +35,7 @@ export function MetricsGrid({ data, isRefreshing, showSkeletons }: MetricsGridPr
       title: "Accuracy Rate",
       value: `${data.accuracyRate.toFixed(1)}%`,
       description: "Based on verified samples",
-      trend: "up" as const,
+      trend: undefined,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
