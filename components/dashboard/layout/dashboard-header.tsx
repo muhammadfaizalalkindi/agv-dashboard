@@ -1,57 +1,49 @@
-'use client';
+import { Clock } from "lucide-react"
+import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
+import { formatCurrentTime } from "@/lib/utils/time"
+import Image from "next/image"
 
-import { useState, useEffect } from 'react';
-import { Clock } from 'lucide-react';
-import { DASHBOARD_CONFIG } from '@/lib/constants/dashboard';
-import { formatCurrentTime } from '@/lib/utils/time';
+interface DashboardHeaderProps {
+  currentTime: Date
+}
 
-export function DashboardHeader() {
-  const [currentTime, setCurrentTime] = useState<Date | null>(null);
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-    setCurrentTime(new Date());
-
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  if (!hasMounted || !currentTime) {
-    return null; // or show skeleton
-  }
-
-  const { time, period } = formatCurrentTime(currentTime);
+export function DashboardHeader({ currentTime }: DashboardHeaderProps) {
+  const { time, period } = formatCurrentTime(currentTime)
 
   return (
     <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 flex-shrink-0">
-      <div>
-        <h1 className="text-lg font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
-          AGV Dashboard
-        </h1>
+      <div className="flex items-center gap-3">
+        <div className="flex-shrink-0">
+          <Image src="/images/logo-agv.png" alt="AGV Logo" width={32} height={32} className="object-contain" priority />
+        </div>
+        <div>
+          <h1 className="text-lg font-semibold tracking-tight" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
+            AGV Dashboard
+          </h1>
+        </div>
       </div>
 
       <div className="flex items-center self-end sm:self-auto">
         <div
-          className="flex items-center gap-2 bg-background border rounded-full px-3 py-1"
-          style={{ borderColor: DASHBOARD_CONFIG.colors.primary }}
+          className="flex items-center gap-2 rounded-full px-3 py-1 border"
+          style={{
+            backgroundColor: DASHBOARD_CONFIG.colors.card.background,
+            borderColor: DASHBOARD_CONFIG.colors.border,
+            boxShadow: DASHBOARD_CONFIG.colors.card.shadow,
+          }}
         >
           <div
             className="h-6 w-6 flex items-center justify-center rounded-full flex-shrink-0"
             style={{ backgroundColor: DASHBOARD_CONFIG.colors.secondary }}
           >
-            <Clock className="h-3 w-3" style={{ color: DASHBOARD_CONFIG.colors.primary }} />
+            <Clock className="h-3 w-3" style={{ color: DASHBOARD_CONFIG.colors.accent }} />
           </div>
-          <span className="text-sm">
-            <span style={{ color: DASHBOARD_CONFIG.colors.primary }}>{time}</span>
-            <span className="text-black">{period}</span>
+          <span className="text-sm font-medium">
+            <span style={{ color: DASHBOARD_CONFIG.colors.text.primary }}>{time}</span>
+            <span style={{ color: DASHBOARD_CONFIG.colors.text.secondary }}>{period}</span>
           </span>
         </div>
       </div>
     </header>
-  );
+  )
 }
-  

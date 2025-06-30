@@ -2,7 +2,6 @@ import { Activity, LineChart, Timer } from "lucide-react"
 import { MetricCard } from "./metric-card"
 import { MetricCardSkeleton } from "./metric-card-skeleton"
 import type { DashboardMetrics } from "@/lib/types/dashboard"
-import { DASHBOARD_CONFIG } from "@/lib/constants/dashboard"
 
 interface MetricsGridProps {
   data: DashboardMetrics
@@ -17,19 +16,19 @@ export function MetricsGrid({ data, isRefreshing, showSkeletons }: MetricsGridPr
       value: data.totalScans.toString(),
       description: "0% from last hour",
       trend: undefined,
-      icon: <LineChart className="h-3 w-3" style={{ color: DASHBOARD_CONFIG.colors.primary }} />,
+      icon: <LineChart className="h-3 w-3" />,
     },
     {
       title: "Active Days",
       value: data.activeDays.toString(),
       description: "System uptime",
-      icon: <Activity className="h-3 w-3" style={{ color: DASHBOARD_CONFIG.colors.primary }} />,
+      icon: <Activity className="h-3 w-3" />,
     },
     {
       title: "Processing Time",
       value: `${data.processingTime.toFixed(2)}s`,
       description: "Per facial scan",
-      icon: <Timer className="h-3 w-3" style={{ color: DASHBOARD_CONFIG.colors.primary }} />,
+      icon: <Timer className="h-3 w-3" />,
     },
     {
       title: "Accuracy Rate",
@@ -43,7 +42,7 @@ export function MetricsGrid({ data, isRefreshing, showSkeletons }: MetricsGridPr
           height="12"
           viewBox="0 0 24 24"
           fill="none"
-          stroke={DASHBOARD_CONFIG.colors.primary}
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

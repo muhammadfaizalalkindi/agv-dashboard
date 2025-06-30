@@ -43,7 +43,10 @@ export default function Dashboard() {
 
   return (
     <TooltipProvider>
-      <div className="h-screen bg-background p-3 overflow-hidden flex flex-col relative">
+      <div
+        className="h-screen p-3 overflow-hidden flex flex-col relative"
+        style={{ backgroundColor: DASHBOARD_CONFIG.colors.background }}
+      >
         <LoadingOverlay isVisible={isInitialLoading} />
 
         <DashboardHeader currentTime={currentTime} />

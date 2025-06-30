@@ -19,16 +19,20 @@ function ExpressionCard({ label, count, percentage, emoji, bgColor, borderColor 
 
   return (
     <div
-      className="rounded-lg p-2 flex items-center h-full border-2"
+      className="rounded-lg p-2 flex items-center h-full border-2 transition-colors hover:bg-slate-50/50"
       style={{ backgroundColor: bgColor, borderColor: borderColor }}
     >
       <span className="text-lg mr-2 flex-shrink-0">{emoji}</span>
       <div className="flex flex-col justify-between flex-1">
-        <div className="font-medium text-xs text-black">{label}</div>
-        <div className="text-base font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
+        <div className="font-medium text-xs" style={{ color: DASHBOARD_CONFIG.colors.text.secondary }}>
+          {label}
+        </div>
+        <div className="text-base font-bold" style={{ color: DASHBOARD_CONFIG.colors.text.primary }}>
           {count}
         </div>
-        <div className="text-xs text-gray-500">{displayPercentage}% of total</div>
+        <div className="text-xs" style={{ color: DASHBOARD_CONFIG.colors.text.muted }}>
+          {displayPercentage}% of total
+        </div>
       </div>
     </div>
   )
@@ -78,7 +82,7 @@ export function FacialExpressions({ data, isRefreshing, showSkeletons }: FacialE
     <AnalyticsCard
       title="Facial Expressions"
       description="Distribution of detected expressions"
-      icon={<Smile className="h-4 w-4" style={{ color: DASHBOARD_CONFIG.colors.primary }} />}
+      icon={<Smile className="h-4 w-4" />}
       isRefreshing={isRefreshing}
     >
       {expressionsData.map((expression) => (
@@ -88,8 +92,8 @@ export function FacialExpressions({ data, isRefreshing, showSkeletons }: FacialE
           count={expression.count.toString()}
           percentage={calculatePercentage(expression.count, totalExpressions)}
           emoji={expression.emoji}
-          bgColor={DASHBOARD_CONFIG.colors.white}
-          borderColor={DASHBOARD_CONFIG.colors.primary}
+          bgColor={DASHBOARD_CONFIG.colors.surface}
+          borderColor={DASHBOARD_CONFIG.colors.border}
         />
       ))}
     </AnalyticsCard>

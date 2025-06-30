@@ -19,16 +19,20 @@ function AgeGroup({ label, count, percentage, color, borderColor, icon }: AgeGro
 
   return (
     <div
-      className="rounded-lg p-2 flex items-center h-full border-2"
+      className="rounded-lg p-2 flex items-center h-full border-2 transition-colors hover:bg-slate-50/50"
       style={{ backgroundColor: color, borderColor: borderColor }}
     >
       <span className="text-lg mr-2 flex-shrink-0">{icon}</span>
       <div className="flex flex-col justify-between flex-1">
-        <div className="text-xs font-medium text-black">{label}</div>
-        <div className="text-base font-bold" style={{ color: DASHBOARD_CONFIG.colors.primary }}>
+        <div className="text-xs font-medium" style={{ color: DASHBOARD_CONFIG.colors.text.secondary }}>
+          {label}
+        </div>
+        <div className="text-base font-bold" style={{ color: DASHBOARD_CONFIG.colors.text.primary }}>
           {count}
         </div>
-        <div className="text-xs text-gray-500">{displayPercentage}% of total</div>
+        <div className="text-xs" style={{ color: DASHBOARD_CONFIG.colors.text.muted }}>
+          {displayPercentage}% of total
+        </div>
       </div>
     </div>
   )
@@ -78,7 +82,7 @@ export function AgeGroups({ data, isRefreshing, showSkeletons }: AgeGroupsProps)
     <AnalyticsCard
       title="Age Groups"
       description="Distribution across age categories"
-      icon={<Users className="h-4 w-4" style={{ color: DASHBOARD_CONFIG.colors.primary }} />}
+      icon={<Users className="h-4 w-4" />}
       isRefreshing={isRefreshing}
     >
       {ageGroupsData.map((group) => (
@@ -87,8 +91,8 @@ export function AgeGroups({ data, isRefreshing, showSkeletons }: AgeGroupsProps)
           label={group.label}
           count={group.count.toString()}
           percentage={calculatePercentage(group.count, totalAgeGroups)}
-          color={DASHBOARD_CONFIG.colors.white}
-          borderColor={DASHBOARD_CONFIG.colors.primary}
+          color={DASHBOARD_CONFIG.colors.surface}
+          borderColor={DASHBOARD_CONFIG.colors.border}
           icon={group.icon}
         />
       ))}

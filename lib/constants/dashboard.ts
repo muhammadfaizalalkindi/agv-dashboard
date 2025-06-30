@@ -1,15 +1,26 @@
 export const DASHBOARD_CONFIG = {
   colors: {
-    primary: "#00007f",
-    secondary: "#ffd900",
-    background: "#f8f9fa",
-    error: "#ffebee",
-    white: "#ffffff",
-    black: "#000000",
-    gray: {
-      500: "#6b7280",
-      200: "#e5e7eb",
-      100: "#f3f4f6",
+    primary: "#1e293b", // Modern slate gray
+    secondary: "#f1f5f9", // Light gray background
+    accent: "#3b82f6", // Professional blue
+    background: "#ffffff", // Clean white
+    surface: "#f8fafc", // Subtle gray surface
+    border: "#e2e8f0", // Light border
+    text: {
+      primary: "#0f172a", // Dark text
+      secondary: "#64748b", // Muted text
+      muted: "#94a3b8", // Light muted text
+    },
+    status: {
+      success: "#10b981", // Modern green
+      warning: "#f59e0b", // Amber warning
+      error: "#ef4444", // Clean red
+      info: "#06b6d4", // Cyan info
+    },
+    card: {
+      background: "#ffffff",
+      border: "#e2e8f0",
+      shadow: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
     },
   },
   animations: {
